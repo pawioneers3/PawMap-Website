@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="PawMap is a role-based stray animal rescue app for reporting, rescue coordination, shelter operations, adoption, donations, and live animal tracking."
+    />
+    <title>PawMap | Report. Rescue. Rehome.</title>
+    <link rel="icon" href="assets/pawmap-icon.png" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header" aria-label="PawMap navigation">
+      <a class="brand" href="#top" aria-label="PawMap home">
+        <img src="assets/pawmap-icon.png" alt="" />
+        <span>PawMap</span>
+      </a>
+      <nav>
+        <a href="#advertisement">Video</a>
+        <a href="#features">Features</a>
+        <a href="#roles">Roles</a>
+        <a href="#download">Download</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-media" aria-hidden="true">
+          <img src="assets/pawmap-bg.jpg" alt="" />
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <img class="hero-logo" src="assets/pawmap-logo.png" alt="PawMap" />
+            <p class="eyebrow">Community rescue platform</p>
+            <h1>See it! Pin it! Save a Life.</h1>
+            <p class="hero-text">
+              PawMap helps citizens report stray, injured, or lost animals with a map pin and photo,
+              while rescue volunteers, shelters, and CityVet teams coordinate the response in real time.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="downloads/PawMap.apk" download>
+                <span aria-hidden="true">&darr;</span>
+                Download APK
+              </a>
+              <a class="button secondary" href="#download">
+                <span aria-hidden="true">&#9638;</span>
+                Scan QR
+              </a>
+              <a class="button ghost" href="pawmap://">
+                <span aria-hidden="true">&nearr;</span>
+                Open App
+              </a>
+            </div>
+          </div>
+
+          <div class="phone-shell" aria-label="PawMap app preview">
+            <div class="phone-status">
+              <span></span>
+              <span></span>
+            </div>
+            <div class="phone-screen">
+              <div class="app-top">
+                <img src="assets/pawmap-icon.png" alt="" />
+                <div>
+                  <strong>PawMap</strong>
+                  <small>Live rescue workspace</small>
+                </div>
+              </div>
+              <div class="map-preview">
+                <span class="pin pin-report"></span>
+                <span class="pin pin-rescuer"></span>
+                <span class="pin pin-shelter"></span>
+                <svg viewBox="0 0 220 150" role="img" aria-label="Rescue route">
+                  <path d="M34 104 C76 54 102 120 142 72 S188 48 206 82" />
+                </svg>
+              </div>
+              <div class="case-card priority">
+                <div>
+                  <small>Priority case</small>
+                  <strong>Injured kitten near Barangay Hall</strong>
+                  <span>Rescue volunteer alerted</span>
+                </div>
+                <b>High</b>
+              </div>
+              <div class="case-list">
+                <div class="case-row">
+                  <span></span>
+                  <div>
+                    <strong>Report submitted</strong>
+                    <small>Photo, animal details, and exact map pin</small>
+                  </div>
+                </div>
+                <div class="case-row">
+                  <span></span>
+                  <div>
+                    <strong>Responder en route</strong>
+                    <small>ETA and status visible to the reporter</small>
+                  </div>
+                </div>
+                <div class="case-row">
+                  <span></span>
+                  <div>
+                    <strong>Shelter handoff</strong>
+                    <small>Intake, adoption, and monitoring continue</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ad-video-section" id="advertisement" aria-labelledby="ad-video-title">
+        <div class="ad-video-copy">
+          <p class="eyebrow">PawMap advertisement</p>
+          <h2 id="ad-video-title">Watch how PawMap connects reports, rescuers, and shelters</h2>
+        </div>
+        <div class="ad-video-frame">
+          <video
+            id="ad-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+            poster="assets/pawmap-bg.jpg"
+          >
+            <source src="assets/videos/pawmap-ad.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </section>
+
+      <section class="section intro" id="features">
+        <div class="section-heading">
+          <p class="eyebrow">Built from the app workflow</p>
+          <h2>One system for field reports and shelter operations</h2>
+        </div>
+        <div class="feature-grid">
+          <article>
+            <span>&#8982;</span>
+            <h3>Emergency reports</h3>
+            <p>Citizens submit dog and cat reports with location search, draggable map pin, photo review, urgency, and reporter verification.</p>
+          </article>
+          <article>
+            <span>&#9678;</span>
+            <h3>Live rescue map</h3>
+            <p>Rescue volunteers can set availability, receive open reports, share live location, and update mission stages through shelter handoff.</p>
+          </article>
+          <article>
+            <span>&hearts;</span>
+            <h3>Adoption and donations</h3>
+            <p>Shelters publish adoptable pets, review adopter applications, receive donations, and keep citizen histories organized.</p>
+          </article>
+          <article>
+            <span>&#9635;</span>
+            <h3>Tracker monitoring</h3>
+            <p>Shelter teams can monitor animal tracker points, draw safe-zone boundaries, and flag out-of-bounds alerts.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section roles" id="roles">
+        <div class="section-heading">
+          <p class="eyebrow">Role-based access</p>
+          <h2>PawMap separates each workflow clearly</h2>
+        </div>
+        <div class="role-board">
+          <article>
+            <b>01</b>
+            <h3>Citizen</h3>
+            <p>Report animals, track rescue updates, apply as a rescuer or shelter admin, donate, and adopt.</p>
+          </article>
+          <article>
+            <b>02</b>
+            <h3>Rescue Volunteer</h3>
+            <p>Manage availability, accept rescue cases, navigate to scenes, update outcomes, and share location.</p>
+          </article>
+          <article>
+            <b>03</b>
+            <h3>Shelter</h3>
+            <p>Coordinate dispatch, review reports, manage adoptions, teams, donations, tracker alerts, and shelter boundaries.</p>
+          </article>
+          <article>
+            <b>04</b>
+            <h3>CityVet / Admin</h3>
+            <p>Oversee approvals, incidents, analytics, completed cases, personnel, governance, and platform notifications.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="download-section" id="download">
+        <div class="download-copy">
+          <p class="eyebrow">Install PawMap</p>
+          <h2>Scan the QR code or download the Android APK</h2>
+          <p>
+            When this website is hosted, the QR code automatically points to the APK file on the same site.
+            You can also open PawMap directly if it is already installed on the device.
+          </p>
+          <div class="download-actions">
+            <a class="button primary" href="downloads/PawMap.apk" download>Download APK</a>
+            <a class="button secondary" href="pawmap://">Open Installed App</a>
+          </div>
+          <p class="apk-note" id="apk-url">APK path: downloads/PawMap.apk</p>
+        </div>
+        <div class="qr-card">
+          <img id="qr-code" alt="QR code to download PawMap APK" />
+          <strong>Scan to download</strong>
+          <small>Android package: com.pawmap.app</small>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>PawMap v1.0.0</span>
+      <span>See it. Pin it. Save a life.</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
