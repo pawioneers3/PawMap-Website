@@ -19,8 +19,8 @@ if (apkUrlText) {
 }
 
 if (adVideo) {
-  adVideo.muted = false;
-  adVideo.volume = 1;
+  adVideo.muted = true;
+  adVideo.volume = 0;
   const playAttempt = adVideo.play();
 
   if (playAttempt && typeof playAttempt.catch === "function") {
