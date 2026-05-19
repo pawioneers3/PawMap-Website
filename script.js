@@ -4,6 +4,10 @@ const qrImage = document.getElementById("qr-code");
 const apkUrlText = document.getElementById("apk-url");
 const adVideo = document.getElementById("ad-video");
 const scrollTopButton = document.getElementById("scroll-top-button");
+const menuButton = document.getElementById("menu-button");
+const mobileDrawer = document.getElementById("mobile-drawer");
+const drawerBackdrop = document.getElementById("drawer-backdrop");
+const drawerClose = document.getElementById("drawer-close");
 
 if (qrImage) {
   const encoded = encodeURIComponent(apkUrl);
@@ -36,4 +40,29 @@ if (scrollTopButton) {
 
   updateScrollTopButton();
   window.addEventListener("scroll", updateScrollTopButton, { passive: true });
+}
+
+if (menuButton && mobileDrawer && drawerBackdrop) {
+  const drawerLinks = mobileDrawer.querySelectorAll("a");
+
+  const setDrawerOpen = (open) => {
+    menuButton.setAttribute("aria-expanded", String(open));
+    mobileDrawer.classList.toggle("is-open", open);
+    mobileDrawer.setAttribute("aria-hidden", String(!open));
+    drawerBackdrop.classList.toggle("is-open", open);
+    drawerBackdrop.hidden = !open;
+    document.body.classList.toggle("drawer-open", open);
+  };
+
+  menuButton.addEventListener("click", () => setDrawerOpen(true));
+  drawerBackdrop.addEventListener("click", () => setDrawerOpen(false));
+  drawerClose?.addEventListener("click", () => setDrawerOpen(false));
+
+  drawerLinks.forEach((link) => {
+    link.addEventListener("click", () => setDrawerOpen(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") setDrawerOpen(false);
+  });
 }
