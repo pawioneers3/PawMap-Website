@@ -1,4 +1,4 @@
-const apkPath = "https://github.com/pawioneers3/PawMap-Website/releases/download/v1.0.0/PawMap.apk";
+const apkPath = "https://github.com/pawioneers3/PawMap-Website/releases/download/v2.0.0/pawmapv2.apk";
 const apkUrl = new URL(apkPath, window.location.href).toString();
 const qrImage = document.getElementById("qr-code");
 const apkUrlText = document.getElementById("apk-url");
