@@ -3,6 +3,7 @@ const apkUrl = new URL(apkPath, window.location.href).toString();
 const qrImage = document.getElementById("qr-code");
 const apkUrlText = document.getElementById("apk-url");
 const adVideo = document.getElementById("ad-video");
+const videoSoundButton = document.getElementById("video-sound-button");
 const scrollTopButton = document.getElementById("scroll-top-button");
 const menuButton = document.getElementById("menu-button");
 const mobileDrawer = document.getElementById("mobile-drawer");
@@ -19,15 +20,82 @@ if (apkUrlText) {
 }
 
 if (adVideo) {
-  adVideo.muted = true;
-  adVideo.volume = 0;
-  const playAttempt = adVideo.play();
+  const showSoundButton = () => {
+    if (videoSoundButton) videoSoundButton.hidden = false;
+  };
 
-  if (playAttempt && typeof playAttempt.catch === "function") {
-    playAttempt.catch(() => {
-      adVideo.setAttribute("data-autoplay-blocked", "true");
-    });
+  const hideSoundButton = () => {
+    if (videoSoundButton) videoSoundButton.hidden = true;
+  };
+
+  const playWithSound = () => {
+    adVideo.muted = false;
+    adVideo.volume = 1;
+    return adVideo.play();
+  };
+
+  const playMutedFallback = () => {
+    adVideo.muted = true;
+    const playAttempt = adVideo.play();
+
+    if (playAttempt && typeof playAttempt.catch === "function") {
+      playAttempt.catch(() => {
+        adVideo.setAttribute("data-autoplay-blocked", "true");
+      });
+    }
+
+    showSoundButton();
+  };
+
+  const enableSoundFromGesture = () => {
+    const playAttempt = playWithSound();
+
+    if (playAttempt && typeof playAttempt.catch === "function") {
+      playAttempt.then(hideSoundButton).catch(() => {
+        adVideo.setAttribute("data-gesture-sound-blocked", "true");
+        showSoundButton();
+      });
+    } else {
+      hideSoundButton();
+    }
+  };
+
+  const soundAttempt = playWithSound();
+
+  if (soundAttempt && typeof soundAttempt.catch === "function") {
+    soundAttempt
+      .then(hideSoundButton)
+      .catch(() => {
+        adVideo.setAttribute("data-sound-autoplay-blocked", "true");
+        playMutedFallback();
+      });
+  } else {
+    hideSoundButton();
   }
+
+  videoSoundButton?.addEventListener("click", () => {
+    enableSoundFromGesture();
+  });
+
+  document.addEventListener("pointerdown", enableSoundFromGesture, { once: true });
+  document.addEventListener("keydown", enableSoundFromGesture, { once: true });
+  document.addEventListener("touchstart", enableSoundFromGesture, { once: true, passive: true });
+
+  adVideo.addEventListener("volumechange", () => {
+    if (adVideo.muted || adVideo.volume === 0) {
+      showSoundButton();
+    } else {
+      hideSoundButton();
+    }
+  });
+
+  adVideo.addEventListener("play", () => {
+    if (adVideo.muted || adVideo.volume === 0) {
+      showSoundButton();
+    } else {
+      hideSoundButton();
+    }
+  });
 }
 
 if (scrollTopButton) {
