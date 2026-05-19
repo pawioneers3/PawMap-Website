@@ -3,6 +3,7 @@ const apkUrl = new URL(apkPath, window.location.href).toString();
 const qrImage = document.getElementById("qr-code");
 const apkUrlText = document.getElementById("apk-url");
 const adVideo = document.getElementById("ad-video");
+const scrollTopButton = document.getElementById("scroll-top-button");
 
 if (qrImage) {
   const encoded = encodeURIComponent(apkUrl);
@@ -22,4 +23,17 @@ if (adVideo) {
       adVideo.setAttribute("data-autoplay-blocked", "true");
     });
   }
+}
+
+if (scrollTopButton) {
+  const updateScrollTopButton = () => {
+    scrollTopButton.classList.toggle("is-visible", window.scrollY > 480);
+  };
+
+  scrollTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  updateScrollTopButton();
+  window.addEventListener("scroll", updateScrollTopButton, { passive: true });
 }
