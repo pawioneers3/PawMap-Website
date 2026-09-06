@@ -1,4 +1,4 @@
-const apkPath = "https://github.com/pawioneers3/PawMap-Website/releases/download/v2.0.0/pawmapv2.apk";
+const apkPath = "https://github.com/pawioneers3/PawMap-Website/releases/download/v1.1.24/PawMapApkV1.1.24.apk";
 const apkUrl = new URL(apkPath, window.location.href).toString();
 const qrImage = document.getElementById("qr-code");
 const apkUrlText = document.getElementById("apk-url");
@@ -10,14 +10,47 @@ const mobileDrawer = document.getElementById("mobile-drawer");
 const drawerBackdrop = document.getElementById("drawer-backdrop");
 const drawerClose = document.getElementById("drawer-close");
 
-if (qrImage) {
-  const encoded = encodeURIComponent(apkUrl);
-  qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=560x560&margin=16&data=${encoded}`;
-}
+const updateApkDownload = (version, url) => {
+  document.querySelectorAll("[data-app-version]").forEach((label) => {
+    label.textContent = version;
+  });
+  document.querySelectorAll("[data-apk-download]").forEach((link) => {
+    link.href = url;
+  });
+  if (qrImage) {
+    const encoded = encodeURIComponent(url);
+    qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=560x560&margin=16&data=${encoded}`;
+  }
+  if (apkUrlText) apkUrlText.textContent = `APK URL: ${url}`;
+};
 
-if (apkUrlText) {
-  apkUrlText.textContent = `APK URL: ${apkUrl}`;
-}
+updateApkDownload("v1.1.24", apkUrl);
+
+const loadLatestRelease = async () => {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  try {
+    const response = await fetch(
+      "https://api.github.com/repos/pawioneers3/PawMap-Website/releases/latest",
+      { headers: { Accept: "application/vnd.github+json" }, cache: "no-cache", signal: controller.signal }
+    );
+    if (!response.ok) return;
+    const release = await response.json();
+    if (release.draft || release.prerelease || typeof release.tag_name !== "string" || !release.tag_name.trim()) return;
+    const apk = Array.isArray(release.assets) && release.assets.find((asset) =>
+      asset.state === "uploaded" && /\.apk$/i.test(asset.name) &&
+      typeof asset.browser_download_url === "string" &&
+      asset.browser_download_url.startsWith("https://github.com/pawioneers3/PawMap-Website/releases/download/")
+    );
+    if (apk) updateApkDownload(release.tag_name, apk.browser_download_url);
+  } catch {
+    // Keep the working fallback when GitHub is unavailable or rate-limited.
+  } finally {
+    clearTimeout(timeout);
+  }
+};
+
+loadLatestRelease();
 
 if (adVideo) {
   const showSoundButton = () => {
