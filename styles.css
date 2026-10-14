@@ -25,6 +25,16 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 5px;
+}
+
 body {
   margin: 0;
   background: #f4faf5;
@@ -357,8 +367,8 @@ h1 {
   max-width: 720px;
   margin-bottom: 18px;
   font-size: clamp(48px, 8vw, 94px);
-  line-height: 0.94;
-  letter-spacing: 0;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
 }
 
 .hero-text {
@@ -583,7 +593,7 @@ h1 {
   gap: 36px;
   align-items: center;
   border: 1px solid #b9d8c5;
-  border-radius: 8px;
+  border-radius: 24px;
   padding: clamp(22px, 4vw, 36px);
   background:
     linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(234, 244, 236, 0.92)),
@@ -709,15 +719,16 @@ h2 {
   margin-bottom: 16px;
   color: var(--text);
   font-size: clamp(30px, 4.8vw, 54px);
-  line-height: 1;
-  letter-spacing: 0;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .feature-grid,
 .role-board {
   display: grid;
-  gap: 16px;
-  margin-top: 32px;
+  gap: 20px;
+  margin-top: 40px;
 }
 
 .feature-grid {
@@ -726,8 +737,10 @@ h2 {
 
 .feature-grid article,
 .role-board article {
-  border-radius: 8px;
-  padding: 22px;
+  border-radius: 20px;
+  padding: 26px;
+  min-width: 0;
+  transition: transform 180ms ease;
   box-shadow: 0 16px 46px rgba(15, 61, 46, 0.08);
 }
 
@@ -741,8 +754,8 @@ h2 {
 .feature-grid span {
   display: inline-grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   margin-bottom: 18px;
   border-radius: 14px;
   background: rgba(209, 245, 221, 0.14);
@@ -765,6 +778,16 @@ h3 {
 
 .feature-grid p {
   color: rgba(255, 255, 255, 0.76);
+  margin-bottom: 0;
+  font-size: 15px;
+}
+
+.feature-grid h3 {
+  line-height: 1.25;
+}
+
+.role-board p {
+  margin-bottom: 0;
 }
 
 .role-board {
@@ -794,7 +817,7 @@ h3 {
   gap: 28px;
   align-items: center;
   border: 1px solid #c6dccf;
-  border-radius: 8px;
+  border-radius: 24px;
   padding: clamp(24px, 4vw, 42px);
   background:
     linear-gradient(135deg, #ffffff, #eaf4ec 58%, #fff3ef),
@@ -814,7 +837,7 @@ h3 {
 .qr-card {
   justify-self: end;
   width: min(100%, 300px);
-  border-radius: 8px;
+  border-radius: 20px;
   padding: 18px;
   text-align: center;
 }
@@ -866,8 +889,8 @@ h3 {
   margin-top: 20px;
 }
 .team-card {
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 20px;
+  padding: 28px 20px;
   text-align: center;
   border: 1px solid rgba(220, 230, 220, 0.5);
   background: #ffffff;
@@ -945,6 +968,23 @@ footer {
   outline-offset: 3px;
 }
 
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .feature-grid article:hover,
+  .role-board article:hover {
+    transform: translateY(-4px);
+  }
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ad-video-section {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  }
+}
+
 @media (max-width: 900px) {
   .site-header {
     position: fixed;
@@ -969,7 +1009,7 @@ footer {
 
   .phone-shell,
   .qr-card {
-    justify-self: start;
+    justify-self: center;
   }
 
   .feature-grid {
@@ -981,6 +1021,29 @@ footer {
 }
 
 @media (max-width: 640px) {
+  .section.intro,
+  .section.roles {
+    padding-top: 56px;
+    padding-bottom: 60px;
+  }
+
+  .ad-video-section,
+  .download-section {
+    margin-top: 48px;
+    margin-bottom: 48px;
+    padding: 24px;
+  }
+
+  h2 {
+    font-size: clamp(28px, 8vw, 38px);
+  }
+
+  .feature-grid,
+  .role-board {
+    margin-top: 28px;
+    gap: 16px;
+  }
+
   .hero {
     min-height: auto;
   }
@@ -1107,5 +1170,19 @@ footer {
     bottom: 16px;
     width: 48px;
     height: 48px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    transition: none !important;
+  }
+
+  .button:hover {
+    transform: none;
   }
 }
