@@ -1,4 +1,4 @@
-const apkPath = "https://github.com/pawioneers3/PawMap-Website/releases/download/v1.1.24/PawMapApkV1.1.24.apk";
+const apkPath = "https://github.com/pawioneers3/PawMap-Website/releases/download/v1.2.0/PawMap_V1.2.0.apk";
 const apkUrl = new URL(apkPath, window.location.href).toString();
 const qrImage = document.getElementById("qr-code");
 const apkUrlText = document.getElementById("apk-url");
@@ -24,7 +24,7 @@ const updateApkDownload = (version, url) => {
   if (apkUrlText) apkUrlText.textContent = `APK URL: ${url}`;
 };
 
-updateApkDownload("v1.1.24", apkUrl);
+updateApkDownload("v1.2.0", apkUrl);
 
 const loadLatestRelease = async () => {
   const controller = new AbortController();
